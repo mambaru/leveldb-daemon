@@ -1,0 +1,17 @@
+#ifndef FAS_MISC_HTTP_EXCEPTIONS_INFORMATIONAL_HPP
+#define FAS_MISC_HTTP_EXCEPTIONS_INFORMATIONAL_HPP
+
+#include "macros_defined.hpp"
+#include "../phrases.hpp"
+
+FAS_HTTP_INFORMATIONAL_EXCEPTION(Continue, 100);
+FAS_HTTP_INFORMATIONAL_EXCEPTION(Switching_Protocols, 101);
+FAS_HTTP_INFORMATIONAL_EXCEPTION(Processing, 102);
+
+/*
+FAS_HTTP_INFORMATIONAL_EXCEPTION(Continue, 100, "Continue");
+FAS_HTTP_INFORMATIONAL_EXCEPTION(Switching_Protocols, 101, "Switching Protocols");
+FAS_HTTP_INFORMATIONAL_EXCEPTION(Processing, 102, "Processing Protocols");
+*/
+
+#endif

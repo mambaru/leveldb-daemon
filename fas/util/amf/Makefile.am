@@ -1,0 +1,2 @@
+fas_util_amf_HEADERS = ad_chunk_collector.hpp ad_client_handshake.hpp ad_proxy_invocation.hpp amf_advices.hpp serialize_invoke.hpp types.hpp ad_chunk_prepare.hpp ad_invoke_connect.hpp ad_server_handshake.hpp client_aspect.hpp server_aspect.hpp unserialize.hpp ad_chunk_splitter.hpp ad_process_content.hpp ad_stub_invocation.hpp serialize.hpp tags.hpp unserialize_invoke.hpp
+fas_util_amfdir = $(includedir)/fas/util/amf
