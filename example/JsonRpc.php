@@ -56,6 +56,7 @@ class JsonRpc_Connection
 	}
 
 	private function send($data) {
+        //echo "//request: ".json_encode($data).PHP_EOL;
 		if (!fwrite($this->socket, json_encode($data)."\r\n")) {
             $this->throwEx('fwrite failed');
         }
@@ -130,8 +131,8 @@ class JsonRpc_Connection
      */
     public function process() {
 		if ( $this->connect()->failed ) {
-            foreach($this->onRecv as $feature) {
-                $feature->failed = true;
+            foreach($this->onRecv as $future) {
+                $future->failed = true;
             }
             return $this;
         }
@@ -140,6 +141,7 @@ class JsonRpc_Connection
 			if ( !$data ) {
                 $this->throwEx('no data recieved');
             }
+            //echo "//response: ".$data.PHP_EOL;
 			$data = json_decode($data, true);
 			if ( isset($data['error']) ) {
                 $this->throwEx(var_export($data['error'],1));

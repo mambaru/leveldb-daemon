@@ -5,22 +5,31 @@ include_once 'JsonRpc.php';
 $config = include 'config.php';
 
 $connect = new JsonRpc_Connection($config['host'], $config['port']);
+
+//request: {"jsonrpc":"2.0","method":"set","id":0,"params":{"foo":"Hello world","bar":"{\"k1\":1,\"k2\":\"This is xopowo\"}"}}
 $connect->request('set', array(
-    'scalar' => "Hello world",
-    'array' => json_encode(array(
+    'foo' => "Hello world",
+    'bar' => json_encode(array(
         'k1' => 1,
         'k2' => 'This is xopowo',
     )),
 ));
+//response: {"jsonrpc":"2.0","id":0,"result":true}
 $connect->process();
 
-$feature = $connect->request('get', array('scalar', 'array'));
+//request: {"jsonrpc":"2.0","method":"get","id":1,"params":["foo","bar"]}
+$future = $connect->request('get', array('foo', 'bar'));
+//response: {"jsonrpc":"2.0","id":1,"result":{"foo":"Hello world","bar":"{\"k1\":1,\"k2\":\"This is xopowo\"}"}}
 $connect->process();
-var_dump($feature->get());
+var_dump($future->get());
 
-$connect->request('del', array('scalar', 'array'));
+//request: {"jsonrpc":"2.0","method":"del","id":2,"params":["foo","bar"]}
+$connect->request('del', array('foo', 'bar'));
+//response: {"jsonrpc":"2.0","id":2,"result":{"foo":true,"bar":true}}
 $connect->process();
 
-$feature = $connect->request('get', array('scalar', 'array'));
+//request: {"jsonrpc":"2.0","method":"get","id":3,"params":["foo","bar"]}
+$future = $connect->request('get', array('foo', 'bar'));
+//response: {"jsonrpc":"2.0","id":3,"result":{}}
 $connect->process();
-var_dump($feature->get());
+var_dump($future->get());
